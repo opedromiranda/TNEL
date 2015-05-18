@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Day 1",
+    "games": [{
+      "home_team": "Benfica",
+      "away_team": "Porto",
+      "id": 1
+    }]
+  },
+  {
+    "name": "Day 2",
+    "games": [{
+      "home_team": "Feirense",
+      "away_team": "Chaves",
+      "id": 2
+    }]
+  },
+  {
+    "name": "Day 3",
+    "games": [{
+      "home_team": "Vitória",
+      "away_team": "Sporting",
+      "id": 1
+    }]
+  }
+]

@@ -5,11 +5,15 @@ import Agents.Player;
 import Components.Bet;
 import Components.Calendar;
 import Components.Game;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Array;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class Utils {
@@ -19,6 +23,7 @@ public class Utils {
     public static ArrayList<Player> players = new ArrayList<Player>();
 
     public static void getElements() {
+        /*
         try {
             String line;
             BufferedReader reader = new BufferedReader(new FileReader("calendar"));
@@ -26,7 +31,7 @@ public class Utils {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(" ");
-                games.add(new Game(parts[0], parts[1], parts[2], parts[3]));
+                //games.add(new Game(parts[0], parts[1], parts[2], parts[3]));
             }
 
             calendar = new Calendar(games);
@@ -62,7 +67,7 @@ public class Utils {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public static ArrayList<Bet> betsSearch(char[] betArray) {
@@ -78,14 +83,81 @@ public class Utils {
         return res;
     }
 
-    public static Game searchGame(String id) {
 
-        for(Game g : calendar.getGamesCalendar()){
-            if(g.getID() == Integer.parseInt(id)){
-                return g;
+
+    public static ArrayList<Player> loadPlayers() {
+        ArrayList<Player> result = new ArrayList<Player>();
+
+        try {
+            String playerData = readFile("players.json");
+
+            JSONArray players = new JSONArray(playerData);
+
+            for (int i = 0; i < players.length(); i++) {
+                JSONObject player = (JSONObject) players.get(i);
+                Integer id = (Integer) player.get("id");
+                Double balance = (Double) player.get("balance");
+                String name = player.getString("name");
+
+                Player p = new Player(id, name, balance);
+                result.add(p);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        return new Game();
+        return result;
     }
+
+    public static Calendar loadCalendar() {
+        Calendar calendar = new Calendar();
+        try {
+            String calendarData = readFile("calendar.json");
+
+            JSONArray calendarDays = new JSONArray(calendarData);
+
+            for (int i = 0; i < calendarDays.length(); i++) {
+                JSONObject calendarEntry = (JSONObject) calendarDays.get(i);
+                String day = calendarEntry.getString("name");
+                JSONArray gamesData = (JSONArray) calendarEntry.get("games");
+                ArrayList games = instantiateGames(gamesData);
+                calendar.setGames(games, day);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return calendar;
+    }
+
+    private static ArrayList<Game> instantiateGames(JSONArray games) throws JSONException {
+        ArrayList<Game> result = new ArrayList<Game>();
+        for (int i = 0; i < games.length(); i++) {
+            JSONObject gameEntry = (JSONObject) games.get(i);
+            String homeTeam = gameEntry.getString("home_team");
+            String awayTeam = gameEntry.getString("away_team");
+            Integer id = (Integer) gameEntry.get("id");
+            Game g = new Game(homeTeam, awayTeam, id);
+            result.add(g);
+        }
+        return result;
+    }
+
+    private static String readFile(String name) throws IOException {
+        FileInputStream stream = new FileInputStream(name);
+        try {
+            FileChannel fc = stream.getChannel();
+            MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0,
+                    fc.size());
+			/* Instead of using default, pass in a decoder. */
+            return Charset.defaultCharset().decode(bb).toString();
+        } finally {
+            stream.close();
+        }
+    }
+
 }

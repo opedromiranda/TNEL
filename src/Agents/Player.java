@@ -13,18 +13,14 @@ public class Player extends Agent {
     public static String TYPE = "PLAYER";
 
     private String name;
-    private String type; // seller or buyer
-    private double initialMoney;
     private double balance; // actual money
-    ArrayList<Bet> gameBets;
+    private Integer id;
 
 
-    public Player(String name, String type, double initialMoney, ArrayList<Bet> gameBets) {
+    public Player(Integer id, String name, double balance) {
         this.name = name;
-        this.type = type;
-        this.initialMoney = initialMoney;
-        this.balance = initialMoney;
-        this.gameBets = gameBets;
+        this.balance = balance;
+        this.id = id;
     }
 
     protected void setup()

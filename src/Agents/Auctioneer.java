@@ -23,6 +23,7 @@ public class Auctioneer extends Agent {
         sd.setName(getLocalName());
         register(sd);
         Utils.getElements();
+        Utils.loadCalendar();
         try {
             callForPlayers();
         } catch (StaleProxyException e) {
