@@ -1,1 +1,1 @@
-http://wifi-interno.fe.up.pt:7778/acc
+http://192.168.1.86:7778/acc

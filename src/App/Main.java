@@ -8,7 +8,10 @@ public class Main {
 
         String[] param = new String[2];
         param[0] = "-gui";
-        param[1] = "Auctioneer:Agents.Auctioneer";
+        param[1] = "Auctioneer:Agents.Loader";
         Boot.main(param);
+
+        Utils.loadPlayers();
+        Utils.loadCalendar();
     }
 }

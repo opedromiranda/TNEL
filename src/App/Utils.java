@@ -10,7 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -83,23 +82,18 @@ public class Utils {
         return res;
     }
 
-
-
     public static ArrayList<Player> loadPlayers() {
         ArrayList<Player> result = new ArrayList<Player>();
 
         try {
-            String playerData = readFile("players.json");
+            String playersData = readFile("players.json");
 
-            JSONArray players = new JSONArray(playerData);
+            JSONArray players = new JSONArray(playersData);
 
             for (int i = 0; i < players.length(); i++) {
-                JSONObject player = (JSONObject) players.get(i);
-                Integer id = (Integer) player.get("id");
-                Double balance = (Double) player.get("balance");
-                String name = player.getString("name");
+                JSONObject playerData = (JSONObject) players.get(i);
 
-                Player p = new Player(id, name, balance);
+                Player p = instantiatePlayer(playerData);
                 result.add(p);
             }
         } catch (IOException e) {
@@ -132,6 +126,14 @@ public class Utils {
         }
 
         return calendar;
+    }
+
+    private static Player instantiatePlayer(JSONObject playerData) throws JSONException {
+        Integer id = (Integer) playerData.get("id");
+        Double balance = (Double) playerData.get("balance");
+        String name = playerData.getString("name");
+
+        return new Player(id, name, balance);
     }
 
     private static ArrayList<Game> instantiateGames(JSONArray games) throws JSONException {

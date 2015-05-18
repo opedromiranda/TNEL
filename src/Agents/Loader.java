@@ -10,21 +10,22 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
+import java.util.ArrayList;
 
-public class Auctioneer extends Agent {
+/**
+ * Created by pedro on 18/05/15.
+ */
+public class Loader extends Agent {
 
-    public static String TYPE = "AUCTIONEER";
-
-    protected void setup()
-    {
-        System.out.println("Auctioneer agent " + getLocalName() + " started.");
+    protected void setup() {
+        System.out.println("Loader agent " + getLocalName() + " started.");
         ServiceDescription sd  = new ServiceDescription();
-        sd.setType(TYPE);
+        sd.setType("LOADER");
         sd.setName(getLocalName());
         register(sd);
-        Utils.getElements();
+
         try {
-            callForPlayers();
+            loadPlayers();
         } catch (StaleProxyException e) {
             e.printStackTrace();
         }
@@ -44,16 +45,13 @@ public class Auctioneer extends Agent {
         }
     }
 
-    private void callForPlayers() throws StaleProxyException {
+    public void loadPlayers() throws StaleProxyException {
+        ArrayList<Player> players = Utils.loadPlayers();
 
-        AgentContainer agentContainer;
-        AgentController agentController;
-
-        for(Player p : Utils.players){
-            agentContainer = getContainerController();
-            agentController = agentContainer.acceptNewAgent(p.getPlayerName(), p);
+        for(Player p : players){
+            AgentContainer agentContainer = getContainerController();
+            AgentController agentController = agentContainer.acceptNewAgent(p.getPlayerName(), p);
             agentController.start();
         }
     }
-
 }
