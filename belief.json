@@ -1,9 +1,0 @@
-[{
-  "id": 1,
-  "game_id": 1,
-  "homeWinOdd": 1,
-  "awayWinOdd": 1,
-  "drawOdd": 1,
-  "belief": 0.9,
-  "player_id": 1
-}]

@@ -2,6 +2,16 @@
   {
     "name": "Emanuel",
     "id": 1,
-    "balance": 20.0
+    "balance": 20.0,
+    "beliefs": [
+      {
+        "game_id": 1,
+        "home_win_odd": 1,
+        "away_win_odd": 1,
+        "draw_odd": 1,
+        "belief_degree": 0.9,
+        "player_id": 1
+      }
+    ]
   }
 ]

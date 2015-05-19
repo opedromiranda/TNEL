@@ -3,21 +3,21 @@ package Components;
 
 public class Game {
 
-    private int ID;
+    private int id;
     private String home;
     private String away;
 
-    public Game(String home, String away, int ID) {
+    public Game(String home, String away, int id) {
         this.home = home;
         this.away = away;
-        this.ID = ID;
+        this.id = id;
     }
 
     public Game() {
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
 

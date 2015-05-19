@@ -1,5 +1,6 @@
 package Agents;
 
+import Components.Belief;
 import Components.Bet;
 import jade.core.Agent;
 import jade.domain.DFService;
@@ -7,6 +8,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Player extends Agent {
 
@@ -16,6 +18,11 @@ public class Player extends Agent {
     private double balance; // actual money
     private Integer id;
 
+    /**
+     * HashMap that contains the player beliefs for each given match
+     * They keys of the match are the id's of each match
+     */
+    private HashMap<Integer, Belief> beliefs = new HashMap<Integer, Belief>();
 
     public Player(Integer id, String name, double balance) {
         this.name = name;
@@ -44,6 +51,17 @@ public class Player extends Agent {
             fe.printStackTrace();
             doDelete();
         }
+    }
+
+    public void setBeliefs(ArrayList<Belief> beliefs) {
+        for(Belief b : beliefs) {
+            Integer gameId = b.getGameId();
+            this.beliefs.put(gameId, b);
+        }
+    }
+
+    public Belief getBeliefForGame(Integer gameId) {
+        return beliefs.get(gameId);
     }
 
     public String getPlayerName() {

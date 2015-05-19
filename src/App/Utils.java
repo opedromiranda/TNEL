@@ -2,6 +2,7 @@ package App;
 
 
 import Agents.Player;
+import Components.Belief;
 import Components.Bet;
 import Components.Calendar;
 import Components.Game;
@@ -14,6 +15,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Utils {
 
@@ -92,8 +94,11 @@ public class Utils {
 
             for (int i = 0; i < players.length(); i++) {
                 JSONObject playerData = (JSONObject) players.get(i);
-
                 Player p = instantiatePlayer(playerData);
+
+                ArrayList<Belief> playerBeliefs = instantiateBeliefs(playerData.getJSONArray("beliefs"));
+                p.setBeliefs(playerBeliefs);
+
                 result.add(p);
             }
         } catch (IOException e) {
@@ -118,6 +123,7 @@ public class Utils {
                 JSONArray gamesData = (JSONArray) calendarEntry.get("games");
                 ArrayList games = instantiateGames(gamesData);
                 calendar.setGames(games, day);
+                calendar.days.add(games);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,6 +151,15 @@ public class Utils {
             Integer id = (Integer) gameEntry.get("id");
             Game g = new Game(homeTeam, awayTeam, id);
             result.add(g);
+        }
+        return result;
+    }
+
+    private static ArrayList<Belief> instantiateBeliefs(JSONArray beliefs) throws JSONException {
+        ArrayList<Belief> result = new ArrayList<Belief>();
+        for (int i = 0; i < beliefs.length(); i++) {
+            JSONObject beliefData = beliefs.getJSONObject(i);
+            result.add(new Belief(beliefData));
         }
         return result;
     }
