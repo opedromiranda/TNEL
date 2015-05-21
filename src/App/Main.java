@@ -1,6 +1,7 @@
 package App;
 
 import Agents.Player;
+import Components.Auction;
 import Components.Belief;
 import Components.Calendar;
 import Components.Game;
@@ -18,37 +19,39 @@ public class Main {
 
     public static void main(String[] args){
 
-        String[] param = new String[2];
-        param[0] = "-gui";
-        param[1] = "Auctioneer:Agents.Loader";
-        Boot.main(param);
-
         players = Utils.loadPlayers();
         calendar = Utils.loadCalendar();
 
-        try {
-            // iterate through every day of the calendar and start the auctions for each day
-            play();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String[] param = new String[2];
+        param[0] = "-gui";
+        param[1] = "Loader:Agents.Loader";
+        Boot.main(param);
     }
 
-    static void play() throws IOException {
+    private void play() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (ArrayList<Game> games : calendar.days) {
+        for (ArrayList<Game> games : Utils.calendar.days) {
 
             for (Game game : games) {
                 Integer gameId = game.getId();
-                System.out.println("Beliefs for game " + gameId + " : ");
+                System.out.println("Beliefs/Auctions for game " + gameId + " : ");
 
-                for (Player player : players) {
+                for (Player player : Utils.players) {
                     Belief belief = player.getBeliefForGame(gameId);
-                    System.out.println(player.getPlayerName() + " : " + belief.getBeliefDegree());
-                }
-            }
+                    Auction auction = player.getAuctionForGame(gameId);
 
+                    if(auction == null){
+                        System.out.println(player.getPlayerName() + ": \nbelief: " + belief.getBeliefDegree());
+                    }
+                    else{
+                        System.out.println(player.getPlayerName() + ": \nbelief: " + belief.getBeliefDegree() +
+                                "\nauction: " + auction.getType() + " with value " + auction.getBetValue());
+                    }
+
+                }
+
+            }
             // press enter to go to next day
             br.readLine();
         }

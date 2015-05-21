@@ -4,11 +4,6 @@
     "game_id": 1,
     "player_id": 1,
     "type": "homeWin",
-    "bets": [
-      {
-        "player_id": 1,
-        "value": 20
-      }
-    ]
+    "bet_value" : 20
   }
 ]

@@ -28,6 +28,18 @@ public class Belief {
         return gameId;
     }
 
+    public double getOdd(String market){
+
+        if(market.equals("homeWin"))
+            return homeWinOdd;
+        else if (market.equals("awayWin"))
+            return awayWinOdd;
+        else if (market.equals("draw"))
+            return drawOdd;
+
+        return 0.0;
+    }
+
     public double getBeliefDegree() {
         return beliefDegree;
     }

@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class Calendar {
 
+    public Calendar() {}
+
     HashMap<String, ArrayList<Game>> gamesCalendar = new HashMap<String, ArrayList<Game>>();
     public ArrayList<ArrayList<Game>> days = new ArrayList<ArrayList<Game>>();
 

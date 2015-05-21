@@ -1,6 +1,7 @@
 package Agents;
 
 import App.Utils;
+import Components.Auction;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -10,11 +11,12 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-/**
- * Created by pedro on 18/05/15.
- */
+
 public class Loader extends Agent {
 
     protected void setup() {
@@ -23,7 +25,6 @@ public class Loader extends Agent {
         sd.setType("LOADER");
         sd.setName(getLocalName());
         register(sd);
-
         try {
             loadPlayers();
         } catch (StaleProxyException e) {
@@ -46,12 +47,16 @@ public class Loader extends Agent {
     }
 
     public void loadPlayers() throws StaleProxyException {
-        ArrayList<Player> players = Utils.loadPlayers();
+        Auctioneer auctioneer = new Auctioneer();
 
-        for(Player p : players){
+        for(Player p : Utils.players){
             AgentContainer agentContainer = getContainerController();
             AgentController agentController = agentContainer.acceptNewAgent(p.getPlayerName(), p);
             agentController.start();
         }
+
+        AgentContainer agentContainer = getContainerController();
+        AgentController agentController = agentContainer.acceptNewAgent("Auctionner", auctioneer);
+        agentController.start();
     }
 }

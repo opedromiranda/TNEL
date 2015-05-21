@@ -1,17 +1,58 @@
 [
-  {
-    "name": "Emanuel",
-    "id": 1,
-    "balance": 20.0,
-    "beliefs": [
-      {
-        "game_id": 1,
-        "home_win_odd": 1,
-        "away_win_odd": 1,
-        "draw_odd": 1,
-        "belief_degree": 0.9,
-        "player_id": 1
-      }
-    ]
-  }
+    {
+        "name": "Emanuel",
+        "id": 1,
+        "balance": 20.0,
+        "beliefs": [
+            {
+                "game_id": 1,
+                "home_win_odd": 2.4,
+                "away_win_odd": 3.1,
+                "draw_odd": 2.0,
+                "belief_degree": 0.9,
+                "player_id": 1
+            }
+        ],
+        "auctions": []
+    },
+    {
+        "name": "Pedro",
+        "id": 2,
+        "balance": 10.0,
+        "beliefs": [
+            {
+                "game_id": 1,
+                "home_win_odd": 1.1,
+                "away_win_odd": 2.5,
+                "draw_odd": 1.9,
+                "belief_degree": 0.8,
+                "player_id": 2
+            }
+        ],
+        "auctions": [
+            {
+                "game_id": 1,
+                "type": "homeWin",
+                "odd" : 1.1,
+                "bet_value" : 5
+            }
+        ]
+    },
+    {
+        "name": "Wilson",
+        "id": 3,
+        "balance": 10.0,
+        "beliefs": [
+            {
+                "game_id": 1,
+                "home_win_odd": 2.0,
+                "away_win_odd": 3.1,
+                "draw_odd": 2.0,
+                "belief_degree": 0.8,
+                "player_id": 3
+            }
+        ],
+        "auctions": []
+    }
+
 ]
