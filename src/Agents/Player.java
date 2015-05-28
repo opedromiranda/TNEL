@@ -1,5 +1,6 @@
 package Agents;
 
+import Agents.behaviours.SellerResponse;
 import Components.Auction;
 import Components.Belief;
 import Components.Bet;
@@ -38,7 +39,7 @@ public class Player extends Agent {
      * HashMap that contains the player auctions for each given match
      * They keys of the match are the id's of each match
      */
-    private HashMap<Integer, Auction> auctions = new HashMap<Integer, Auction>();
+    public HashMap<Integer, Auction> auctions = new HashMap<Integer, Auction>();
 
     public Player(Integer id, String name, double balance) {
         this.name = name;
@@ -54,6 +55,7 @@ public class Player extends Agent {
         sd.setName(getLocalName());
         register(sd);
         addBehaviour(new FIPAContractNetResp(this, MessageTemplate.MatchPerformative(ACLMessage.CFP)));
+        addBehaviour(new SellerResponse(this,  MessageTemplate.MatchPerformative(ACLMessage.REQUEST)));
     }
 
     void register(ServiceDescription sd)
@@ -201,6 +203,9 @@ public class Player extends Agent {
 
             return result;
         }
+    }
 
+    public int getId() {
+        return id;
     }
 }

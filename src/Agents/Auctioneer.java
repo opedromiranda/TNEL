@@ -1,8 +1,10 @@
 package Agents;
 
+import Agents.behaviours.FixtureBehaviour;
 import App.Utils;
 import Components.Auction;
 import Components.Belief;
+import Components.Calendar;
 import Components.Game;
 import jade.core.AID;
 import jade.core.Agent;
@@ -30,6 +32,8 @@ public class Auctioneer extends Agent {
 
     public static String TYPE = "AUCTIONEER";
 
+    private Calendar calendar;
+
     protected void setup()
     {
         System.out.println("Auctioneer agent " + getLocalName() + " started.");
@@ -37,6 +41,11 @@ public class Auctioneer extends Agent {
         sd.setType(TYPE);
         sd.setName(getLocalName());
         register(sd);
+
+        this.calendar = Utils.calendar;
+
+
+
         SequentialBehaviour gameDays = play();
         addBehaviour(gameDays);
     }
@@ -59,11 +68,8 @@ public class Auctioneer extends Agent {
 
         SequentialBehaviour gameDays = new SequentialBehaviour();
 
-        for (ArrayList<Game> games : Utils.calendar.days) {
-
-            for (Game game : games) {
-                gameDays.addSubBehaviour(new GameContractNet(this, new ACLMessage(ACLMessage.CFP), game));
-            }
+        for (ArrayList<Game> games : calendar.days) {
+            gameDays.addSubBehaviour(new FixtureBehaviour(this, games));
         }
 
         return gameDays;
@@ -111,13 +117,7 @@ public class Auctioneer extends Agent {
             }
 
             v.add(cfp);
-
             return v;
-        }
-
-        @Override
-        public int onEnd() {
-            return super.onEnd();
         }
 
         protected void handleAllResponses(Vector responses, java.util.Vector acceptances) {
@@ -166,11 +166,6 @@ public class Auctioneer extends Agent {
             v.add(cfp);
 
             return v;
-        }
-
-        @Override
-        public int onEnd() {
-            return super.onEnd();
         }
 
         protected void handleAllResponses(Vector responses, java.util.Vector acceptances) {

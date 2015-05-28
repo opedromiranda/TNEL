@@ -33,4 +33,8 @@ public class Auction {
     public double getOdd() {
         return odd;
     }
+
+    public Integer getAuctionId() {
+        return auctionId;
+    }
 }
