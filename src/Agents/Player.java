@@ -4,8 +4,6 @@ import Agents.behaviours.AuctionPlayerBehavior;
 import Agents.behaviours.SellerResponse;
 import Components.Auction;
 import Components.Belief;
-import Components.Bet;
-import Components.Game;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -13,14 +11,8 @@ import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import jade.proto.ContractNetResponder;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class Player extends Agent {
 
@@ -29,6 +21,7 @@ public class Player extends Agent {
     private String name;
     private double balance; // actual money
     private Integer id;
+    private HashMap<Integer, Double> responsability;
 
     /**
      * HashMap that contains the player beliefs for each given match
@@ -46,6 +39,7 @@ public class Player extends Agent {
         this.name = name;
         this.balance = balance;
         this.id = id;
+        responsability = new HashMap<Integer, Double>();
     }
 
     protected void setup()
@@ -101,6 +95,39 @@ public class Player extends Agent {
 
     public Auction getAuctionForGame(Integer gameId) {
         return auctions.get(gameId);
+    }
+
+    public boolean inAuction(Integer auctionId, double value) {
+
+        if (responsability.containsKey(auctionId)){
+            double actualValue = responsability.get(auctionId);
+            if (balance >= (value - actualValue)) {
+                balance -= (value - actualValue);
+                responsability.put(auctionId, value);
+                return true;
+            }
+            else {
+                exitAuction(auctionId);
+                return false;
+            }
+        }
+        else if(balance > value){
+            responsability.put(auctionId, value);
+            return true;
+        }
+        else
+            return false;
+
+    }
+
+    public void exitAuction(Integer auctionId) {
+        double value = responsability.get(auctionId);
+        responsability.remove(auctionId);
+        balance += value;
+    }
+
+    public boolean hasKey(Integer auctionId) {
+        return responsability.containsKey(auctionId);
     }
 
 }

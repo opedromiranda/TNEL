@@ -42,16 +42,29 @@ public class AuctionPlayerBehavior extends ContractNetResponder {
         double betValue = auction.getBetValue();
         String type = auction.getType();
         Belief beliefForGame = getPlayer().getBeliefForGame(gameId);
+        boolean continueInAuction;
 
-        if (beliefForGame != null && getPlayer().getBalance() > (odd * betValue)) {
+        if (beliefForGame != null) {
             double beliefDegree = beliefForGame.getBeliefDegree();
             Random r = new Random();
             int probability = r.nextInt(99) + 1;
 
             if (odd <= beliefForGame.getOdd(type))
-                return probability < beliefDegree;
+                continueInAuction = probability <= beliefDegree;
             else
-                return probability > beliefDegree;
+                continueInAuction = probability >= beliefDegree;
+
+            if (continueInAuction) {
+                if (getPlayer().inAuction(auction.getAuctionId(), odd * betValue)) {
+                    return true;
+                }
+            }
+            else {
+                if(getPlayer().hasKey(auction.getAuctionId())) {
+                    getPlayer().exitAuction(auction.getAuctionId());
+                }
+                return false;
+            }
         }
 
         return false;
