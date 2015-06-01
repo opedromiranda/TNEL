@@ -18,7 +18,6 @@ public class SellerResponse extends AchieveREResponder {
         Auction auction = getPlayer().auctions.get(gameId);
 
         if(auction != null){
-            System.out.println("NOTNULL");
             reply.setPerformative(ACLMessage.AGREE);
             reply.setContent("" + gameId);
         } else {

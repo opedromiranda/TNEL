@@ -6,6 +6,9 @@ import Components.Auction;
 import Components.Belief;
 import Components.Calendar;
 import Components.Game;
+import jade.content.lang.Codec;
+import jade.content.lang.sl.SLCodec;
+import jade.content.onto.Ontology;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.SequentialBehaviour;
@@ -25,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Vector;
 
 
@@ -41,11 +45,7 @@ public class Auctioneer extends Agent {
         sd.setType(TYPE);
         sd.setName(getLocalName());
         register(sd);
-
         this.calendar = Utils.calendar;
-
-
-
         SequentialBehaviour gameDays = play();
         addBehaviour(gameDays);
     }
@@ -65,6 +65,9 @@ public class Auctioneer extends Agent {
     }
 
     private SequentialBehaviour play() {
+
+        Scanner sc = new Scanner(System.in);
+        sc.hasNextLine();
 
         SequentialBehaviour gameDays = new SequentialBehaviour();
 

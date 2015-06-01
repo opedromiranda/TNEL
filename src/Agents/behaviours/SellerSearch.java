@@ -14,9 +14,6 @@ import jade.proto.AchieveREInitiator;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/**
- * Created by pedro on 28/05/15.
- */
 public class SellerSearch  extends AchieveREInitiator {
     Game game;
     FixtureBehaviour parentBehaviour;

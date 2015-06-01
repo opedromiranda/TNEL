@@ -3,9 +3,6 @@ package Components;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by pedro on 19/05/15.
- */
 public class Belief {
 
     Integer gameId,

@@ -9,7 +9,7 @@
                 "home_win_odd": 2.4,
                 "away_win_odd": 3.1,
                 "draw_odd": 2.0,
-                "belief_degree": 0.9,
+                "belief_degree": 99,
                 "player_id": 1
             }
         ],
@@ -25,7 +25,7 @@
                 "home_win_odd": 1.1,
                 "away_win_odd": 2.5,
                 "draw_odd": 1.9,
-                "belief_degree": 0.8,
+                "belief_degree": 99,
                 "player_id": 2
             }
         ],
@@ -44,11 +44,11 @@
         "balance": 10.0,
         "beliefs": [
             {
-                "game_id": 1,
+                "game_id": 2,
                 "home_win_odd": 2.0,
                 "away_win_odd": 3.1,
                 "draw_odd": 2.0,
-                "belief_degree": 0.8,
+                "belief_degree": 99,
                 "player_id": 3
             }
         ],

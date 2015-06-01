@@ -38,6 +38,12 @@ public class FixtureBehaviour extends SimpleBehaviour {
         return auctionsFinished >= numberOfAuctions;
     }
 
+    @Override
+    public int onEnd() {
+        System.out.println("Day finished");
+        return super.onEnd();
+    }
+
     private SellerSearch lookForSellers(Game g) {
         SellerSearch s = new SellerSearch(getAgent(), new ACLMessage(ACLMessage.REQUEST), this, g);
         getAgent().addBehaviour(s);
@@ -69,13 +75,14 @@ public class FixtureBehaviour extends SimpleBehaviour {
         }
 
         for (Player p : Utils.players) {
-            if (p.getAID().getName() == playerAID.getName()) {
+            if (p.getAID().getName().compareTo(playerAID.getName()) == 0) {
                 player = p;
                 break;
             }
         }
 
-        AuctionBehaviour auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), this, game, player);
+        AuctionBehaviour auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), this, game, player, new ArrayList<AID>());
+        System.out.println("Auction started of game : " + game.getId());
         getAgent().addBehaviour(auctionBehavior);
     }
 }

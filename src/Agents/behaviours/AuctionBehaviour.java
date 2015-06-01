@@ -3,6 +3,7 @@ package Agents.behaviours;
 import Agents.Player;
 import Components.Auction;
 import Components.Game;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -12,75 +13,95 @@ import jade.lang.acl.ACLMessage;
 import jade.proto.ContractNetInitiator;
 import org.json.JSONException;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Vector;
 
-/**
- * Created by pedro on 28/05/15.
- */
+
 public class AuctionBehaviour extends ContractNetInitiator {
 
     FixtureBehaviour parentBehavior;
     Game game;
     Player player;
     Auction auction;
+    ArrayList<AID> playersInGame;
 
-    public AuctionBehaviour(Agent a, ACLMessage cfp, FixtureBehaviour parentBehaviour, Game game, Player player) {
+    public AuctionBehaviour(Agent a, ACLMessage cfp, FixtureBehaviour parentBehaviour, Game game, Player player, ArrayList<AID> playersInGame) {
         super(a, cfp);
         this.parentBehavior = parentBehaviour;
         this.game = game;
         this.player = player;
         auction = player.auctions.get(game.getId());
+        this.playersInGame = playersInGame;
     }
 
     protected Vector prepareCfps(ACLMessage cfp) {
-        /*
         Vector v = new Vector();
 
-        DFAgentDescription[] players = getPlayers(Player.TYPE);
-        for (int i = 0; i < players.length; ++i) {
-            cfp.addReceiver(players[i].getName());
+        if (playersInGame.isEmpty()) {
+            DFAgentDescription[] players = getPlayers(Player.TYPE);
+            for (int i = 0; i < players.length; ++i) {
+                cfp.addReceiver(players[i].getName());
+            }
+        }
+        else {
+            cfp = new ACLMessage(ACLMessage.CFP);
+            for (AID playerAID : playersInGame) {
+                cfp.addReceiver(playerAID);
+            }
         }
 
-        cfp.setContent(auction.toString());
+        try {
+            cfp.setContentObject((java.io.Serializable) this.auction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        v.add(cfp);*/
-        System.out.println("começou");
-        return null;
+        v.add(cfp);
+        return v;
     }
 
     protected void handleAllResponses(Vector responses, java.util.Vector acceptances) {
-        System.out.println("recebeu");
-        /*if (responses.size() <= 1) {
-            System.out.println("Winner : " + ((ACLMessage) responses.get(0)).getSender());
-            ACLMessage msg = ((ACLMessage) responses.get(0)).createReply();
-            msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-            acceptances.add(msg);
-            this.done();
-        }
-        else {
-            try {
-                //incrementBid();
-                for(int i=0; i<responses.size(); i++) {
-                    ACLMessage msg = ((ACLMessage) responses.get(i)).createReply();
-                    msg.setPerformative(ACLMessage.CFP);
-                    msg.setContent(auction.toString());
-                    acceptances.add(msg);
-                }
+        //System.out.println("handle responses: " + responses.size());
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+        for(int i=0; i < responses.size(); i++) {
+            ACLMessage msg = ((ACLMessage) responses.get(i)).createReply();
+            if ( ((ACLMessage) responses.get(i)).getPerformative() == ACLMessage.PROPOSE ) {
+                msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
             }
-
-        }*/
+            else {
+                msg.setPerformative(ACLMessage.REJECT_PROPOSAL);
+            }
+            acceptances.add(msg);
+        }
     }
 
-    /*private void incrementBid() throws JSONException {
-        double actualBid = auction.getDouble("odd");
-        auction.put("odd", actualBid + 0.1);
-    }*/
-
     protected void handleAllResultNotifications(java.util.Vector resultNotifications) {
-        System.out.println("got " + resultNotifications.size() + " result notifs!");
+        //System.out.println("got " + resultNotifications.size() + " result notifs!");
+        AuctionBehaviour auctionBehavior = null;
+
+        if (resultNotifications.size() == 0) {
+            auction.nextRound();
+            if (auction.getRound() >= 3) {
+                System.out.println("Auction ended by lack of buyers");
+            }
+            auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
+            getAgent().addBehaviour(auctionBehavior);
+        }
+        else if(resultNotifications.size() == 1){
+            System.out.println("WINNER FOUNDED: " + ((ACLMessage) resultNotifications.get(0)).getSender().getLocalName());
+            parentBehavior.incrementAuctionsFinished();
+        }
+        else {
+            auction.incrementActualOdd();
+            playersInGame.clear();
+            auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
+            for(int i = 0; i < resultNotifications.size(); i++){
+                playersInGame.add(((ACLMessage) resultNotifications.get(i)).getSender());
+            }
+            getAgent().addBehaviour(auctionBehavior);
+        }
+
     }
 
     public DFAgentDescription[] getPlayers(String TYPE) {
