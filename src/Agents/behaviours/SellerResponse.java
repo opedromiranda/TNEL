@@ -18,8 +18,13 @@ public class SellerResponse extends AchieveREResponder {
         Auction auction = getPlayer().auctions.get(gameId);
 
         if(auction != null){
-            reply.setPerformative(ACLMessage.AGREE);
-            reply.setContent("" + gameId);
+            if (getPlayer().decrementBalance(auction.getBetValue())) {
+                reply.setPerformative(ACLMessage.AGREE);
+                reply.setContent("" + gameId);
+                auction.setOwnerId(getPlayer().getLocalName());
+            }
+            else
+                reply.setPerformative(ACLMessage.REFUSE);
         } else {
             reply.setPerformative(ACLMessage.REFUSE);
         }

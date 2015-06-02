@@ -38,37 +38,16 @@ public class AuctionPlayerBehavior extends ContractNetResponder {
 
     private boolean makeBid(Auction auction) {
         int gameId = auction.getGameId();
-        double odd = auction.getActualOdd();
-        double betValue = auction.getBetValue();
-        String type = auction.getType();
         Belief beliefForGame = getPlayer().getBeliefForGame(gameId);
-        boolean continueInAuction;
 
         if (beliefForGame != null) {
-            double beliefDegree = beliefForGame.getBeliefDegree();
-            Random r = new Random();
-            int probability = r.nextInt(99) + 1;
-
-            if (odd <= beliefForGame.getOdd(type))
-                continueInAuction = probability <= beliefDegree;
-            else
-                continueInAuction = probability >= beliefDegree;
-
-            if (continueInAuction) {
-                if (getPlayer().inAuction(auction.getAuctionId(), odd * betValue)) {
-                    return true;
-                }
-            }
-            else {
-                if(getPlayer().hasKey(auction.getAuctionId())) {
-                    getPlayer().exitAuction(auction.getAuctionId());
-                }
-                return false;
+            if (getPlayer().isAvailable(auction) && getPlayer().makeAuction(auction, beliefForGame)) {
+                return true;
             }
         }
 
+        getPlayer().exitAuction(auction);
         return false;
-
     }
 
     protected void handleOutOfSequence(ACLMessage msg){

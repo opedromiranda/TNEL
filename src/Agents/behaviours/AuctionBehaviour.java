@@ -78,19 +78,20 @@ public class AuctionBehaviour extends ContractNetInitiator {
 
     protected void handleAllResultNotifications(java.util.Vector resultNotifications) {
         //System.out.println("got " + resultNotifications.size() + " result notifs!");
-        AuctionBehaviour auctionBehavior = null;
+        AuctionBehaviour auctionBehavior;
 
         if (resultNotifications.size() == 0) {
             auction.nextRound();
             if (auction.getRound() >= 3) {
-                System.out.println("Auction ended by lack of buyers");
+                parentBehavior.incrementAuctionsFinished(auction);
             }
             auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
             getAgent().addBehaviour(auctionBehavior);
         }
         else if(resultNotifications.size() == 1){
             System.out.println("WINNER FOUNDED: " + ((ACLMessage) resultNotifications.get(0)).getSender().getLocalName());
-            parentBehavior.incrementAuctionsFinished();
+            auction.setBuyerId(((ACLMessage) resultNotifications.get(0)).getSender().getLocalName());
+            parentBehavior.incrementAuctionsFinished(auction);
         }
         else {
             auction.incrementActualOdd();
@@ -101,7 +102,6 @@ public class AuctionBehaviour extends ContractNetInitiator {
             }
             getAgent().addBehaviour(auctionBehavior);
         }
-
     }
 
     public DFAgentDescription[] getPlayers(String TYPE) {
