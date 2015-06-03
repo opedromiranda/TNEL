@@ -42,10 +42,11 @@ public class Player extends Agent {
         this.balance = balance;
         this.id = id;
         responsability = new HashMap<Integer, Double>();
-        strategy = 1;
-//        Random rand = new Random();
-//        strategy = rand.nextInt(3) + 1;
-//        blocked = false;
+        //strategy = 1;
+        Random rand = new Random();
+        strategy = rand.nextInt(3) + 1;
+        blocked = false;
+        System.out.println("Player :" + name + " with strategy " + strategy);
     }
 
     protected void setup()
@@ -137,6 +138,7 @@ public class Player extends Agent {
 
         double responsabilityValue = actualOdd * betValue;
         if (blocked) {
+            System.out.println("blocked");
             return false;
         }
         if (responsability.containsKey(auctionId)) {

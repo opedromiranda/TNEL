@@ -21,7 +21,16 @@
                 "player_id": 1
             }
         ],
-        "auctions": []
+        "auctions": [
+            {
+                "id": 2,
+                "player_id": 1,
+                "game_id": 4,
+                "type": "homeWin",
+                "odd" : 1.1,
+                "bet_value" : 5
+            }
+        ]
     },
     {
         "name": "Pedro",
