@@ -143,13 +143,13 @@ public class Player extends Agent {
         }
         if (responsability.containsKey(auctionId)) {
             if (balance > (responsabilityValue - responsability.get(auctionId))) {
-                blocked = true;
+                //blocked = true;
                 return true;
             }
         }
         else {
             if (balance >= responsabilityValue) {
-                blocked = true;
+                //blocked = true;
                 return true;
             }
         }
@@ -188,6 +188,7 @@ public class Player extends Agent {
                 }
                 break;
             default:
+                blocked = false;
                 res = false;
                 break;
         }

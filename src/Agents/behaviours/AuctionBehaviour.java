@@ -15,6 +15,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Vector;
 
 
@@ -76,8 +77,9 @@ public class AuctionBehaviour extends ContractNetInitiator {
         }
     }
 
-    protected void handleAllResultNotifications(java.util.Vector resultNotifications) {
+    synchronized protected void handleAllResultNotifications(java.util.Vector resultNotifications) {
         //System.out.println("got " + resultNotifications.size() + " result notifs!");
+        waitRandomTime();
         AuctionBehaviour auctionBehavior;
 
         if (resultNotifications.size() == 0) {
@@ -96,11 +98,23 @@ public class AuctionBehaviour extends ContractNetInitiator {
         else {
             auction.incrementActualOdd();
             playersInGame.clear();
+
             auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
             for(int i = 0; i < resultNotifications.size(); i++){
                 playersInGame.add(((ACLMessage) resultNotifications.get(i)).getSender());
             }
             getAgent().addBehaviour(auctionBehavior);
+        }
+    }
+
+    synchronized private void waitRandomTime() {
+        Random r = new Random();
+        int ms = r.nextInt(10);
+        try {
+
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
