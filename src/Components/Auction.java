@@ -1,5 +1,6 @@
 package Components;
 
+import App.Main;
 import jade.core.AID;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,4 +82,18 @@ public class Auction implements Serializable {
     public String getownerId(){return ownerId;}
 
     public void setOwnerId(String id){this.ownerId = id;}
+
+    public void generateResult() {
+        System.out.println("type: " + type);
+        if (type.equals("homeWin") || type.equals("awayWin")) {
+            double probability = 1 / actualOdd;
+            boolean won = Math.random() > probability;
+
+            if (won) {
+                System.out.println("backer won");
+            } else {
+                System.out.println("backer lost");
+            }
+        }
+    }
 }

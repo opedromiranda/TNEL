@@ -61,6 +61,7 @@ public class FixtureBehaviour extends SimpleBehaviour {
     public void incrementAuctionsFinished(Auction auction) {
         auctionsCompleted.add(auction);
         auctionsFinished++;
+        auction.generateResult();
     }
 
     public void onEndSellerSearch(ArrayList<ACLMessage> sellers) {

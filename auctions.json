@@ -5,5 +5,12 @@
     "player_id": 1,
     "type": "homeWin",
     "bet_value" : 20
+  },
+  {
+    "id": 2,
+    "game_id": 4,
+    "player_id": 2,
+    "type": "homeWin",
+    "bet_value" : 12
   }
 ]

@@ -89,7 +89,7 @@ public class AuctionBehaviour extends ContractNetInitiator {
             getAgent().addBehaviour(auctionBehavior);
         }
         else if(resultNotifications.size() == 1){
-            System.out.println("WINNER FOUNDED: " + ((ACLMessage) resultNotifications.get(0)).getSender().getLocalName());
+            System.out.println("WINNER FOUND: " + ((ACLMessage) resultNotifications.get(0)).getSender().getLocalName());
             auction.setBuyerId(((ACLMessage) resultNotifications.get(0)).getSender().getLocalName());
             parentBehavior.incrementAuctionsFinished(auction);
         }

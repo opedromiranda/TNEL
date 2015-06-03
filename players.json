@@ -11,6 +11,14 @@
                 "draw_odd": 2.0,
                 "belief_degree": 99,
                 "player_id": 1
+            },
+            {
+                "game_id": 4,
+                "home_win_odd": 2.4,
+                "away_win_odd": 3.1,
+                "draw_odd": 2.0,
+                "belief_degree": 99,
+                "player_id": 1
             }
         ],
         "auctions": []
@@ -22,6 +30,14 @@
         "beliefs": [
             {
                 "game_id": 1,
+                "home_win_odd": 1.1,
+                "away_win_odd": 2.5,
+                "draw_odd": 1.9,
+                "belief_degree": 99,
+                "player_id": 2
+            },
+            {
+                "game_id": 4,
                 "home_win_odd": 1.1,
                 "away_win_odd": 2.5,
                 "draw_odd": 1.9,
@@ -47,6 +63,14 @@
         "beliefs": [
             {
                 "game_id": 1,
+                "home_win_odd": 2.7,
+                "away_win_odd": 3.1,
+                "draw_odd": 2.0,
+                "belief_degree": 99,
+                "player_id": 3
+            },
+            {
+                "game_id": 4,
                 "home_win_odd": 2.7,
                 "away_win_odd": 3.1,
                 "draw_odd": 2.0,
