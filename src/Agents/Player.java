@@ -43,8 +43,13 @@ public class Player extends Agent {
         this.id = id;
         responsability = new HashMap<Integer, Double>();
         //strategy = 1;
-        Random rand = new Random();
-        strategy = rand.nextInt(3) + 1;
+        if(id == 1) {
+            strategy = 1;
+        }
+        else {
+            Random rand = new Random();
+            strategy = rand.nextInt(2) + 2;
+        }
         blocked = false;
         System.out.println("Player :" + name + " with strategy " + strategy);
     }

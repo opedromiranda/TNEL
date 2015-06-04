@@ -2,7 +2,7 @@
     {
         "name": "Emanuel",
         "id": 1,
-        "balance": 100.0,
+        "balance": 300.0,
         "beliefs": [
             {
                 "name": "Benfica - Porto",
@@ -125,7 +125,7 @@
     {
         "name": "Pedro",
         "id": 2,
-        "balance": 50.0,
+        "balance": 300.0,
         "beliefs": [
             {
                 "name": "Benfica - Porto",
@@ -232,7 +232,7 @@
     {
         "name": "Wilson",
         "id": 3,
-        "balance": 230.0,
+        "balance": 300.0,
         "beliefs": [
             {
                 "name": "Benfica - Porto",
@@ -347,7 +347,7 @@
     {
         "name": "Miguel",
         "id": 4,
-        "balance": 20.0,
+        "balance": 300.0,
         "beliefs": [
             {
                 "name": "Benfica - Porto",
@@ -462,7 +462,7 @@
     {
         "name": "Matias",
         "id": 5,
-        "balance": 120.0,
+        "balance": 300.0,
         "beliefs": [
             {
                 "name": "Benfica - Porto",

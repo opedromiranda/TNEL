@@ -5,7 +5,7 @@
           "Home Team": "Benfica",
           "Auction bet value": 5,
           "Auction id": 1,
-          "Player Winner strategy": 3,
+          "Player Winner strategy": 1,
           "Auction initial odd": 2.3,
           "Auction number final round": 11,
           "Auction seller id": "Emanuel",
@@ -13,17 +13,17 @@
           "Result": "homeWin"
      },
      {
-          "Player Winner id": 2,
+          "Player Winner id": 1,
           "Away Team": "Chaves",
           "Home Team": "Feirense",
           "Auction bet value": 10,
           "Auction id": 2,
           "Player Winner strategy": 1,
           "Auction initial odd": 1.4,
-          "Auction number final round": 0,
+          "Auction number final round": 1,
           "Auction seller id": "Emanuel",
-          "Player Winner": "Pedro",
-          "Result": "awayWin"
+          "Player Winner": "Emanuel",
+          "Result": "draw"
      },
      {
           "Player Winner id": 2,
@@ -31,24 +31,24 @@
           "Home Team": "Vitória",
           "Auction bet value": 5,
           "Auction id": 3,
-          "Player Winner strategy": 1,
+          "Player Winner strategy": 3,
           "Auction initial odd": 1.7,
-          "Auction number final round": 3,
+          "Auction number final round": 4,
           "Auction seller id": "Pedro",
           "Player Winner": "Pedro",
-          "Result": "homeWin"
+          "Result": "awayWin"
      },
      {
-          "Player Winner id": 4,
+          "Player Winner id": 3,
           "Away Team": "Boavista",
           "Home Team": "Chaves",
           "Auction bet value": 5,
           "Auction id": 5,
           "Player Winner strategy": 2,
           "Auction initial odd": 2,
-          "Auction number final round": 2,
+          "Auction number final round": 1,
           "Auction seller id": "Wilson",
-          "Player Winner": "Miguel",
+          "Player Winner": "Wilson",
           "Result": "awayWin"
      },
      {
@@ -57,28 +57,28 @@
           "Home Team": "Porto",
           "Auction bet value": 5,
           "Auction id": 6,
-          "Player Winner strategy": 2,
+          "Player Winner strategy": 3,
           "Auction initial odd": 1.2,
-          "Auction number final round": 2,
+          "Auction number final round": 1,
           "Auction seller id": "Miguel",
           "Player Winner": "Miguel",
           "Result": "homeWin"
      },
      {
-          "Player Winner id": 2,
+          "Player Winner id": 1,
           "Away Team": "Feirense",
           "Home Team": "Benfica",
           "Auction bet value": 5,
           "Auction id": 7,
           "Player Winner strategy": 1,
           "Auction initial odd": 1.1,
-          "Auction number final round": 3,
+          "Auction number final round": 2,
           "Auction seller id": "Miguel",
-          "Player Winner": "Pedro",
-          "Result": "awayWin"
+          "Player Winner": "Emanuel",
+          "Result": "draw"
      },
      {
-          "Player Winner id": 5,
+          "Player Winner id": 4,
           "Away Team": "Setubal",
           "Home Team": "Benfica",
           "Auction bet value": 5,
@@ -87,21 +87,21 @@
           "Auction initial odd": 1.2,
           "Auction number final round": 1,
           "Auction seller id": "Matias",
-          "Player Winner": "Matias",
-          "Result": "homeWin"
+          "Player Winner": "Miguel",
+          "Result": "awayWin"
      },
      {
-          "Player Winner id": 2,
+          "Player Winner id": 1,
           "Away Team": "Braga",
           "Home Team": "Porto",
           "Auction bet value": 5,
           "Auction id": 9,
           "Player Winner strategy": 1,
           "Auction initial odd": 1.8,
-          "Auction number final round": 7,
+          "Auction number final round": 6,
           "Auction seller id": "Matias",
-          "Player Winner": "Pedro",
-          "Result": "homeWin"
+          "Player Winner": "Emanuel",
+          "Result": "awayWin"
      },
      {
           "Player Winner id": 1,
@@ -109,11 +109,11 @@
           "Home Team": "Sporting",
           "Auction bet value": 5,
           "Auction id": 10,
-          "Player Winner strategy": 3,
+          "Player Winner strategy": 1,
           "Auction initial odd": 2.5,
-          "Auction number final round": 5,
+          "Auction number final round": 3,
           "Auction seller id": "Emanuel",
           "Player Winner": "Emanuel",
-          "Result": "awayWin"
+          "Result": "homeWin"
      }
 ]
