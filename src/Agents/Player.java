@@ -44,13 +44,13 @@ public class Player extends Agent {
         responsability = new HashMap<Integer, Double>();
         //strategy = 1;
         if(id == 1) {
-            strategy = 2;
+            strategy = 1;
         }
         else {
             Random rand = new Random();
             int value = rand.nextInt(2);
             if(value == 0)
-                strategy = 1;
+                strategy = 2;
             else
                 strategy = 3;
         }
