@@ -241,4 +241,11 @@ public class Player extends Agent {
         }
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public int getStrategy() {
+        return strategy;
+    }
 }

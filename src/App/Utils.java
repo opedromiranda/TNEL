@@ -18,6 +18,7 @@ public class Utils {
 
     public static ArrayList<Player> players = new ArrayList<Player>();
     public static Calendar calendar = new Calendar();
+    public static ArrayList<Result> results = new ArrayList<Result>();
 
     public static ArrayList<Player> loadPlayers() {
         try {
@@ -121,4 +122,35 @@ public class Utils {
         }
     }
 
+    public static void saveResults() throws JSONException {
+
+            JSONArray res = new JSONArray();
+
+            for (Result r : results) {
+                JSONObject main = new JSONObject();
+                main.put("Home Team", r.getGame().getHome());
+                main.put("Away Team", r.getGame().getAway());
+                main.put("Result", r.getGame().getResult());
+                main.put("Auction id", r.getAuction().getAuctionId());
+                main.put("Auction seller id", r.getAuction().getownerId());
+                main.put("Auction initial odd", r.getAuction().getOdd());
+                main.put("Auction initial odd", r.getAuction().getOdd());
+                main.put("Auction bet value", r.getAuction().getBetValue());
+                main.put("Auction number final round", r.getAuction().getRound());
+                main.put("Player Winner", r.getWinner().getPlayerName());
+                main.put("Player Winner id", r.getWinner().getId());
+                main.put("Player Winner strategy", r.getWinner().getStrategy());
+                res.put(main);
+            }
+
+            try {
+                FileWriter fstream = new FileWriter("results.json");
+                BufferedWriter out = new BufferedWriter(fstream);
+                out.write(res.toString(5));
+                out.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+    }
 }

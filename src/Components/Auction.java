@@ -11,6 +11,7 @@ public class Auction implements Serializable {
 
     Integer auctionId,
             gameId,
+            repeatRound,
             round;
     String  ownerId,
             buyerId;
@@ -29,6 +30,7 @@ public class Auction implements Serializable {
         actualOdd = startOdd;
         buyerId = null;
         ownerId = null;
+        this.repeatRound = 0;
         this.round = 0;
     }
 
@@ -54,14 +56,10 @@ public class Auction implements Serializable {
 
     public void incrementActualOdd() {
         actualOdd += 0.01;
-        resetRound();
+        resetRepeatRound();
     }
 
-    public double getActualOdd() {
-        return actualOdd;
-    }
-
-    public void nextRound(){
+    public void incrementRound() {
         this.round++;
     }
 
@@ -69,8 +67,20 @@ public class Auction implements Serializable {
         return round;
     }
 
-    public void resetRound (){
-        this.round = 0;
+    public double getActualOdd() {
+        return actualOdd;
+    }
+
+    public void nextRepeatRound(){
+        this.repeatRound++;
+    }
+
+    public int getRepeatRound(){
+        return repeatRound;
+    }
+
+    public void resetRepeatRound (){
+        this.repeatRound = 0;
     }
 
     public void setBuyerId(String id) {

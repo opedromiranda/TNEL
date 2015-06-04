@@ -26,5 +26,11 @@ public class Game {
 
     public void setResult(String result){this.result = result;}
 
+    public String getHome() {
+        return home;
+    }
 
+    public String getAway() {
+        return away;
+    }
 }

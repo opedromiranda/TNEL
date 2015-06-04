@@ -83,8 +83,8 @@ public class AuctionBehaviour extends ContractNetInitiator {
         AuctionBehaviour auctionBehavior;
 
         if (resultNotifications.size() == 0) {
-            auction.nextRound();
-            if (auction.getRound() >= 3) {
+            auction.nextRepeatRound();
+            if (auction.getRepeatRound() >= 3) {
                 parentBehavior.incrementAuctionsFinished(auction);
             }
             auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
@@ -98,6 +98,7 @@ public class AuctionBehaviour extends ContractNetInitiator {
         else {
             auction.incrementActualOdd();
             playersInGame.clear();
+            auction.incrementRound();
 
             auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
             for(int i = 0; i < resultNotifications.size(); i++){

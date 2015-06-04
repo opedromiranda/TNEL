@@ -44,7 +44,6 @@ public class SellerSearch  extends AchieveREInitiator {
 
     @Override
     protected void handleAgree(ACLMessage agree) {
-        System.out.println("Go agree");
         sellers.add(agree);
         super.handleAgree(agree);
     }

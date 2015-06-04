@@ -101,6 +101,11 @@ public class Auctioneer extends Agent {
         @Override
         public int onEnd() {
             printAllUsers();
+            try {
+                Utils.saveResults();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return super.onEnd();
         }
 

@@ -1,0 +1,41 @@
+[
+     {
+          "Player Winner id": 3,
+          "Away Team": "Porto",
+          "Home Team": "Benfica",
+          "Auction bet value": 5,
+          "Auction id": 1,
+          "Player Winner strategy": 2,
+          "Auction initial odd": 1.1,
+          "Auction number final round": 1,
+          "Auction seller id": "Pedro",
+          "Player Winner": "Wilson",
+          "Result": "awayWin"
+     },
+     {
+          "Player Winner id": 3,
+          "Away Team": "Porto - Rematch",
+          "Home Team": "Benfica - Rematch",
+          "Auction bet value": 5,
+          "Auction id": 2,
+          "Player Winner strategy": 2,
+          "Auction initial odd": 1.1,
+          "Auction number final round": 35,
+          "Auction seller id": "Emanuel",
+          "Player Winner": "Wilson",
+          "Result": "awayWin"
+     },
+     {
+          "Player Winner id": 2,
+          "Away Team": "Chaves",
+          "Home Team": "Feirense",
+          "Auction bet value": 5,
+          "Auction id": 4,
+          "Player Winner strategy": 2,
+          "Auction initial odd": 1.1,
+          "Auction number final round": 2,
+          "Auction seller id": "Emanuel",
+          "Player Winner": "Pedro",
+          "Result": "draw"
+     }
+]

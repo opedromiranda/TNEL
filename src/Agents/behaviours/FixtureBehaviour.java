@@ -1,6 +1,7 @@
 package Agents.behaviours;
 
 import Agents.Player;
+import App.Result;
 import App.Utils;
 import Components.Auction;
 import Components.Game;
@@ -94,6 +95,7 @@ public class FixtureBehaviour extends SimpleBehaviour {
     }
 
     private void finishGames() {
+        System.out.println("Auctions Completed:" + auctionsCompleted.size());
 
         for (Game g : games) {
             Random rand = new Random();
@@ -116,10 +118,14 @@ public class FixtureBehaviour extends SimpleBehaviour {
                     if (g.getResult().compareTo(a.getType()) == 0) {
                         Player winner = findPlayer(a.getownerId());
                         winner.winnerAsSeller(a);
+                        Result r = new Result(g, a, winner);
+                        Utils.results.add(r);
                     }
                     else {
                         Player winner = findPlayer(a.getBuyerId());
                         winner.winnerAsBuyer(a);
+                        Result r = new Result(g, a, winner);
+                        Utils.results.add(r);
                     }
                 }
             }
