@@ -5,10 +5,6 @@
             "home_team": "Benfica",
             "away_team": "Porto",
             "id": 1
-        }, {
-            "home_team": "Benfica - Rematch",
-            "away_team": "Porto - Rematch",
-            "id": 4
         }]
     },
     {
@@ -73,14 +69,6 @@
             "home_team": "Sporting",
             "away_team": "Braga",
             "id": 10
-        }]
-    },
-    {
-        "name": "Day 10",
-        "games": [{
-            "home_team": "Braga",
-            "away_team": "Arouca",
-            "id": 11
         }]
     }
 ]

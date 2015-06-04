@@ -63,17 +63,27 @@ public class AuctionBehaviour extends ContractNetInitiator {
     }
 
     protected void handleAllResponses(Vector responses, java.util.Vector acceptances) {
-        //System.out.println("handle responses: " + responses.size());
+        boolean availableAcceptances = false;
 
         for(int i=0; i < responses.size(); i++) {
             ACLMessage msg = ((ACLMessage) responses.get(i)).createReply();
             if ( ((ACLMessage) responses.get(i)).getPerformative() == ACLMessage.PROPOSE ) {
+                availableAcceptances = true;
                 msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
             }
             else {
                 msg.setPerformative(ACLMessage.REJECT_PROPOSAL);
             }
             acceptances.add(msg);
+        }
+
+        if (!availableAcceptances) {
+            auction.nextRepeatRound();
+            if (auction.getRepeatRound() >= 3) {
+                parentBehavior.incrementAuctionsFinished(auction);
+            }
+            AuctionBehaviour auctionBehavior = new AuctionBehaviour(getAgent(), new ACLMessage(ACLMessage.CFP), parentBehavior, game, player, playersInGame);
+            getAgent().addBehaviour(auctionBehavior);
         }
     }
 
@@ -83,6 +93,8 @@ public class AuctionBehaviour extends ContractNetInitiator {
         AuctionBehaviour auctionBehavior;
 
         if (resultNotifications.size() == 0) {
+           // System.out.println("repetida ronda");
+
             auction.nextRepeatRound();
             if (auction.getRepeatRound() >= 3) {
                 parentBehavior.incrementAuctionsFinished(auction);
@@ -96,6 +108,8 @@ public class AuctionBehaviour extends ContractNetInitiator {
             parentBehavior.incrementAuctionsFinished(auction);
         }
         else {
+            //System.out.println("Nova ronda");
+
             auction.incrementActualOdd();
             playersInGame.clear();
             auction.incrementRound();
@@ -112,7 +126,6 @@ public class AuctionBehaviour extends ContractNetInitiator {
         Random r = new Random();
         int ms = r.nextInt(10);
         try {
-
             Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();

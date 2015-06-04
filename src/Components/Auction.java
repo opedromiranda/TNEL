@@ -87,9 +87,13 @@ public class Auction implements Serializable {
         this.buyerId = id;
     }
 
-    public String getBuyerId(){return buyerId;}
+    public String getBuyerId(){
+        return buyerId;
+    }
 
-    public String getownerId(){return ownerId;}
+    public String getownerId(){
+        return ownerId;
+    }
 
     public void setOwnerId(String id){this.ownerId = id;}
 

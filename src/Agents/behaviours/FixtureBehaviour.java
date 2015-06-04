@@ -46,6 +46,7 @@ public class FixtureBehaviour extends SimpleBehaviour {
     @Override
     public int onEnd() {
         finishGames();
+        System.out.println("Day finished");
         return super.onEnd();
     }
 
@@ -133,11 +134,14 @@ public class FixtureBehaviour extends SimpleBehaviour {
     }
 
     private Player findPlayer(String name) {
+        if(name == null) {
+            return new Player(0, "Nobody wins", 0);
+        }
         for (Player p : Utils.players) {
             if (p.getLocalName().compareTo(name) == 0) {
                 return p;
             }
         }
-        return null;
+        return new Player(0, "Nobody wins", 0);
     }
 }
