@@ -44,13 +44,13 @@ public class Player extends Agent {
         responsability = new HashMap<Integer, Double>();
         //strategy = 1;
         if(id == 1) {
-            strategy = 1;
+            strategy = 2;
         }
         else {
             Random rand = new Random();
             int value = rand.nextInt(2);
             if(value == 0)
-                strategy = 2;
+                strategy = 1;
             else
                 strategy = 3;
         }
@@ -244,7 +244,7 @@ public class Player extends Agent {
         else {
             Random r = new Random();
             int probability = r.nextInt(99) + 1;
-            double increments = (actualOdd - initialOdd) * 100;
+            double increments = (actualOdd - initialOdd);
             double playerExponentialBeliefDegree = Math.pow((playerBeliefDegree/100), increments) * 100;
             return probability >= playerExponentialBeliefDegree;
         }
