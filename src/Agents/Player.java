@@ -44,7 +44,7 @@ public class Player extends Agent {
         responsability = new HashMap<Integer, Double>();
         //strategy = 1;
         if(id == 1) {
-            strategy = 1;
+            strategy = 3;
         }
         else {
             Random rand = new Random();
@@ -52,7 +52,7 @@ public class Player extends Agent {
             if(value == 0)
                 strategy = 2;
             else
-                strategy = 3;
+                strategy = 1;
         }
         blocked = false;
         System.out.println("Player :" + name + " with strategy " + strategy);

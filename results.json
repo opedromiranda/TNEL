@@ -4,22 +4,22 @@
           "Home Team": "Benfica",
           "Auction bet value": 5,
           "Auction id": 1,
-          "Player Winner strategy": 3,
+          "Player Winner strategy": 2,
           "Auction initial odd": 2.3,
-          "Auction number final round": 12,
-          "Buyer": "Matias",
+          "Auction number final round": 11,
+          "Buyer": "Wilson",
           "Auction seller id": "Emanuel",
-          "Result": "draw"
+          "Result": "awayWin"
      },
      {
           "Away Team": "Chaves",
           "Home Team": "Feirense",
           "Auction bet value": 10,
           "Auction id": 2,
-          "Player Winner strategy": 1,
+          "Player Winner strategy": 3,
           "Auction initial odd": 1.4,
-          "Auction number final round": 0,
-          "Buyer": "Matias",
+          "Auction number final round": 2,
+          "Buyer": "Emanuel",
           "Auction seller id": "Emanuel",
           "Result": "homeWin"
      },
@@ -31,33 +31,33 @@
           "Player Winner strategy": 1,
           "Auction initial odd": 1.7,
           "Auction number final round": 11,
-          "Buyer": "Emanuel",
+          "Buyer": "Pedro",
           "Auction seller id": "Pedro",
-          "Result": "homeWin"
+          "Result": "awayWin"
      },
      {
           "Away Team": "Boavista",
           "Home Team": "Chaves",
           "Auction bet value": 5,
           "Auction id": 5,
-          "Player Winner strategy": 2,
+          "Player Winner strategy": 3,
           "Auction initial odd": 2,
-          "Auction number final round": 1,
-          "Buyer": "Pedro",
+          "Auction number final round": 2,
+          "Buyer": "Emanuel",
           "Auction seller id": "Wilson",
-          "Result": "draw"
+          "Result": "awayWin"
      },
      {
           "Away Team": "Boavista",
           "Home Team": "Porto",
           "Auction bet value": 5,
           "Auction id": 6,
-          "Player Winner strategy": 3,
+          "Player Winner strategy": 2,
           "Auction initial odd": 1.2,
           "Auction number final round": 1,
-          "Buyer": "Matias",
+          "Buyer": "Miguel",
           "Auction seller id": "Miguel",
-          "Result": "draw"
+          "Result": "awayWin"
      },
      {
           "Away Team": "Feirense",
@@ -66,8 +66,8 @@
           "Auction id": 7,
           "Player Winner strategy": 2,
           "Auction initial odd": 1.1,
-          "Auction number final round": 1,
-          "Buyer": "Emanuel",
+          "Auction number final round": 0,
+          "Buyer": "Pedro",
           "Auction seller id": "Miguel",
           "Result": "homeWin"
      },
@@ -81,7 +81,7 @@
           "Auction number final round": 1,
           "Buyer": "Miguel",
           "Auction seller id": "Matias",
-          "Result": "awayWin"
+          "Result": "homeWin"
      },
      {
           "Away Team": "Braga",
@@ -90,8 +90,8 @@
           "Auction id": 9,
           "Player Winner strategy": 1,
           "Auction initial odd": 1.8,
-          "Auction number final round": 4,
-          "Buyer": "Emanuel",
+          "Auction number final round": 2,
+          "Buyer": "Pedro",
           "Auction seller id": "Matias",
           "Result": "awayWin"
      },
@@ -102,8 +102,8 @@
           "Auction id": 10,
           "Player Winner strategy": 1,
           "Auction initial odd": 2.5,
-          "Auction number final round": 2,
-          "Buyer": "Emanuel",
+          "Auction number final round": 1,
+          "Buyer": "Pedro",
           "Auction seller id": "Emanuel",
           "Result": "draw"
      }
