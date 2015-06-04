@@ -48,7 +48,11 @@ public class Player extends Agent {
         }
         else {
             Random rand = new Random();
-            strategy = rand.nextInt(2) + 2;
+            int value = rand.nextInt(2);
+            if(value == 0)
+                strategy = 2;
+            else
+                strategy = 3;
         }
         blocked = false;
         System.out.println("Player :" + name + " with strategy " + strategy);
@@ -214,7 +218,7 @@ public class Player extends Agent {
         Random r = new Random();
         int probability = r.nextInt(99) + 1;
         double riskRatio = responsabilityValue / balance;
-        double newPlayerBeliefDegree = playerBeliefDegree - riskRatio;
+        double newPlayerBeliefDegree = playerBeliefDegree - riskRatio * 100;
 
         if (actualOdd <= playerOddBelief)
             return probability <= newPlayerBeliefDegree;
@@ -241,7 +245,7 @@ public class Player extends Agent {
             Random r = new Random();
             int probability = r.nextInt(99) + 1;
             double increments = (actualOdd - initialOdd) * 100;
-            double playerExponentialBeliefDegree = Math.pow(playerBeliefDegree, increments);
+            double playerExponentialBeliefDegree = Math.pow((playerBeliefDegree/100), increments) * 100;
             return probability >= playerExponentialBeliefDegree;
         }
     }

@@ -88,6 +88,9 @@ public class Auction implements Serializable {
     }
 
     public String getBuyerId(){
+        if(buyerId == null){
+            return "Nobody bought";
+        }
         return buyerId;
     }
 

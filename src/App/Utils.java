@@ -137,8 +137,7 @@ public class Utils {
                 main.put("Auction initial odd", r.getAuction().getOdd());
                 main.put("Auction bet value", r.getAuction().getBetValue());
                 main.put("Auction number final round", r.getAuction().getRound());
-                main.put("Player Winner", r.getWinner().getPlayerName());
-                main.put("Player Winner id", r.getWinner().getId());
+                main.put("Buyer", r.getAuction().getBuyerId());
                 main.put("Player Winner strategy", r.getWinner().getStrategy());
                 res.put(main);
             }
